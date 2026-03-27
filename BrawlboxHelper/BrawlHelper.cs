@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Syroot.NintenTools.NSW.Bfres;
-using ResU = Syroot.NintenTools.Bfres;
+using ResU = BfresLibrary;
 using System.Windows;
 using Syroot.Maths;
 using BrawlLib.SSBB.ResourceNodes;
@@ -32,26 +32,26 @@ namespace BrawlboxHelper
 
     public class FSHUConverter
     {
-        public static ResU.ShaderParamAnim Clr02Fshu(string FileName)
+        public static ResU.MaterialAnim Clr02Fshu(string FileName)
         {
             CLR0Node clr0 = NodeFactory.FromFile(null, FileName) as CLR0Node;
 
 
-            ResU.ShaderParamAnim fshu = new ResU.ShaderParamAnim();
+            ResU.MaterialAnim fshu = new ResU.MaterialAnim();
             fshu.FrameCount = clr0.FrameCount;
             fshu.Name = clr0.Name;
             fshu.Path = clr0.OriginalPath;
-            fshu.UserData = new ResU.ResDict<Syroot.NintenTools.Bfres.UserData>();
+            fshu.UserData = new ResU.ResDict<ResU.UserData>();
 
             //Set flags
             if (clr0.Loop)
-                fshu.Flags |= ResU.ShaderParamAnimFlags.Looping;
+                fshu.Loop = true;
 
             //Set mat anims and then calculate data after
             foreach (var entry in clr0.Children)
             {
                 if (entry is CLR0MaterialNode)
-                    fshu.ShaderParamMatAnims.Add(Clr0Entry2ShaderMatAnim(clr0, (CLR0MaterialNode)entry));
+                    fshu.MaterialAnimDataList.Add(Clr0Entry2ShaderMatAnim(clr0, (CLR0MaterialNode)entry));
             }
 
             fshu.BakedSize = CalculateBakeSize(fshu);
@@ -60,9 +60,9 @@ namespace BrawlboxHelper
             return fshu;
         }
 
-        public static ResU.ShaderParamMatAnim Clr0Entry2ShaderMatAnim(CLR0Node clr0, CLR0MaterialNode clrMaterial)
+        public static ResU.MaterialAnimData Clr0Entry2ShaderMatAnim(CLR0Node clr0, CLR0MaterialNode clrMaterial)
         {
-            ResU.ShaderParamMatAnim matAnim = new ResU.ShaderParamMatAnim();
+            ResU.MaterialAnimData matAnim = new ResU.MaterialAnimData();
             matAnim.Name = clrMaterial.Name;
             matAnim.Constants = new List<ResU.AnimConstant>();
             matAnim.Curves = new List<ResU.AnimCurve>();
@@ -235,15 +235,15 @@ namespace BrawlboxHelper
             return curve;
         }
 
-        private static ushort[] SetIndices(ResU.ShaderParamAnim fshu)
+        private static ushort[] SetIndices(ResU.MaterialAnim fshu)
         {
             List<ushort> indces = new List<ushort>();
-            foreach (var matAnim in fshu.ShaderParamMatAnims)
+            foreach (var matAnim in fshu.MaterialAnimDataList)
                 indces.Add(65535);
 
             return indces.ToArray();
         }
-        private static uint CalculateBakeSize(ResU.ShaderParamAnim fshu)
+        private static uint CalculateBakeSize(ResU.MaterialAnim fshu)
         {
             return 0;
         }

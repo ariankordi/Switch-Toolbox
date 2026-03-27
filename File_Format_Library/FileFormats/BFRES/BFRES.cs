@@ -1101,7 +1101,7 @@ namespace FirstPlugin
             {
                 for (int i = 0; i < resFileU.Textures.Count; i++)
                 {
-                    var ftex = new FTEX(resFileU.Textures[i]);
+                    var ftex = new FTEX(resFileU.Textures[i] as ResU.WiiU.Texture);
                     texturesFolder.AddNode(ftex);
                     ftex.UpdateMipMaps();
                 }
@@ -1458,7 +1458,7 @@ namespace FirstPlugin
                                 progressBar.Value = ((curTex * 100) / resFileTex2.Textures.Count);
                                 progressBar.Refresh();
 
-                                FTEX.GenerateMipmaps(tex.texture.MipCount, tex.Format, tex.GetBitmap(), resFileTex2.Textures[tex.Text]);
+                                FTEX.GenerateMipmaps(tex.texture.MipCount, tex.Format, tex.GetBitmap(), resFileTex2.Textures[tex.Text] as ResU.WiiU.Texture);
                             }
                             else
                             {
@@ -1863,8 +1863,7 @@ namespace FirstPlugin
                 case BRESGroupType.MatVisAnim:
                     for (int i = 0; i < group.Nodes.Count; i++)
                     {
-                        ((FVIS)group.Nodes[i]).SaveAnimData();
-                        resFileU.MatVisibilityAnims.Add(group.Nodes[i].Text, ((FVIS)group.Nodes[i]).VisibilityAnimU);
+                        resFileU.MatVisibilityAnims.Add(group.Nodes[i].Text, ((FSHU)group.Nodes[i]).ShaderParamAnim);
                     }
                     break;
                 case BRESGroupType.BoneVisAnim:

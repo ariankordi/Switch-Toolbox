@@ -993,6 +993,7 @@
     <Compile Include="FileFormats\Texture\BFLIM.cs" />
     <Compile Include="FileFormats\Layout\CAFE\BFLAN.cs" />
     <Compile Include="FileFormats\Layout\CAFE\BFLYT.cs" />
+    <Compile Include="FileFormats\BFRES\Bfres Structs\BfresWiiUImportExport.cs" />
     <Compile Include="FileFormats\BFRES\Bfres Structs\CurveHelper.cs" />
     <Compile Include="FileFormats\BFRES\BFRES.cs" />
     <Compile Include="FileFormats\Texture\NUT.cs" />

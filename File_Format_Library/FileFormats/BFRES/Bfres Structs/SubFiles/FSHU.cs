@@ -53,9 +53,14 @@ namespace Bfres.Structs
 
         public void Replace(string FileName, ResFile resFile)
         {
-            ShaderParamAnim = new ShaderParamAnim();
+            ShaderParamAnim = new MaterialAnim();
+
+            ShaderParamAnim.Import(FileName, resFile);
+            ShaderParamAnim.Name = Text;
+            LoadAnim(ShaderParamAnim, AnimType);
 
             string ext = Utils.GetExtension(FileName);
+            /*
             if (ext == ".bfshu")
             {
                 ShaderParamAnim.Import(FileName, resFile, ShaderParamAnimType.ShaderParameter);
@@ -74,7 +79,8 @@ namespace Bfres.Structs
                 ShaderParamAnim.Name = Text;
                 LoadAnim(ShaderParamAnim, AnimType);
             }
-            else if (ext == ".bfmaa")
+            else */
+            if (ext == ".bfmaa")
             {
                 var fmaa = new Syroot.NintenTools.NSW.Bfres.MaterialAnim(); ;
                 fmaa.Import(FileName);
@@ -90,12 +96,12 @@ namespace Bfres.Structs
                 ShaderParamAnim.Name = Text;
                 LoadAnim(ShaderParamAnim, AnimType);
             }
-            else if (ext == ".clr0")
+            /*else if (ext == ".clr0")
             {
                 ShaderParamAnim = BrawlboxHelper.FSHUConverter.Clr02Fshu(FileName);
                 ShaderParamAnim.Name = Text;
                 LoadAnim(ShaderParamAnim, AnimType);
-            }
+            }*/
 
             UpdateEditor();
         }
@@ -114,6 +120,8 @@ namespace Bfres.Structs
             
         public override void Export(string FileName)
         {
+            ShaderParamAnim.Export(FileName, GetResFile());
+            /*
             string ext = Utils.GetExtension(FileName);
             if (ext == ".bfshu")
             {
@@ -140,6 +148,7 @@ namespace Bfres.Structs
             else if (ext == ".clr0")
             {
             }
+            */
         }
 
         public FSHU(MaterialAnim anim, AnimationType type) {

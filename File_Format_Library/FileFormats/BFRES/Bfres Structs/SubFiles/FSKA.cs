@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Syroot.NintenTools.NSW.Bfres;
 using System.Windows.Forms;
 using Toolbox.Library;
-using ResU = Syroot.NintenTools.Bfres;
+using ResU = BfresLibrary;
 using FirstPlugin;
 using OpenTK;
 using GL_EditorFramework.StandardCameras;
@@ -123,12 +123,24 @@ namespace Bfres.Structs
             }
             else
             {
-                SkeletalAnimU.Copy(target.SkeletalAnimU, new ResU.SkeletalAnim.CopyFilter()
+                var src = target.SkeletalAnimU;
+                if (copySettings)
                 {
-                    CopyBoneAnims = copyBoneAnims,
-                    CopySettings = copySettings,
-                    CopyUserData = copyUserData,
-                });
+                    SkeletalAnimU.FlagsScale = src.FlagsScale;
+                    SkeletalAnimU.FlagsRotate = src.FlagsRotate;
+                    SkeletalAnimU.FlagsAnimSettings = src.FlagsAnimSettings;
+                    SkeletalAnimU.FrameCount = src.FrameCount;
+                    SkeletalAnimU.BakedSize = src.BakedSize;
+                }
+                if (copyBoneAnims)
+                {
+                    SkeletalAnimU.BoneAnims = new List<ResU.BoneAnim>(src.BoneAnims);
+                    SkeletalAnimU.BindIndices = src.BindIndices?.ToArray();
+                }
+                if (copyUserData)
+                {
+                    SkeletalAnimU.UserData = src.UserData;
+                }
             }
 
             OpenAnimationData();

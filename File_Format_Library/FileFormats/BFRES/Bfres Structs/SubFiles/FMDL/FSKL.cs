@@ -5,11 +5,12 @@ using System.Linq;
 using Syroot.NintenTools.NSW.Bfres;
 using System.Windows.Forms;
 using Toolbox.Library;
-using ResU = Syroot.NintenTools.Bfres;
+using ResU = BfresLibrary;
 using FirstPlugin; 
 using Toolbox.Library.NodeWrappers;
 using Toolbox.Library.Forms;
 using Toolbox.Library.IO;
+using BfresLibrary.Core;
 
 namespace Bfres.Structs
 {
@@ -206,8 +207,8 @@ namespace Bfres.Structs
                         if (SkeletonU != null)
                         {
                             ResU.Skeleton SkeltonTemp = new ResU.Skeleton();
-                            SkeltonTemp.Import(ofd.FileName, GetResFileU());
-                          
+                            BfresWiiUImportExport.ImportSection(ofd.FileName, SkeltonTemp, GetResFileU());
+
                             foreach (BfresBone bone in fskl.bones)
                             {
                                 if (SkeltonTemp.Bones.ContainsKey(bone.Text))
@@ -326,7 +327,7 @@ namespace Bfres.Structs
                             if (SkeletonU != null)
                             {
                                 ResU.Bone BoneTemp = new ResU.Bone();
-                                BoneTemp.Import(file, GetResFileU());
+                                BfresWiiUImportExport.ImportSection(file, BoneTemp, GetResFileU());
                                 BoneTemp.SmoothMatrixIndex = -1;
                                 BoneTemp.RigidMatrixIndex = -1;
 
@@ -371,7 +372,7 @@ namespace Bfres.Structs
                         var indices = this.SkeletonU.MatrixToBoneList;
 
                         SkeletonU = new ResU.Skeleton();
-                        SkeletonU.Import(FileName, GetResFileU());
+                        BfresWiiUImportExport.ImportSection(FileName, SkeletonU, GetResFileU());
                         SkeletonU.MatrixToBoneList = indices;
 
                         Nodes.Clear();
@@ -469,7 +470,7 @@ namespace Bfres.Structs
                         if (SkeletonU != null)
                         {
                             ResU.Bone bone = new ResU.Bone();
-                            bone.Import(FileName, GetResFileU());
+                            BfresWiiUImportExport.ImportSection(FileName, bone, GetResFileU());
                             bone.ParentIndex = -1;
                             bone.SmoothMatrixIndex = -1;
                             bone.RigidMatrixIndex = -1;
@@ -516,7 +517,7 @@ namespace Bfres.Structs
             public override void Export(string FileName)
             {
                 if (SkeletonU != null)
-                    SkeletonU.Export(FileName, ((FMDL)Parent).GetResFileU());
+                    BfresWiiUImportExport.ExportSection(FileName, SkeletonU, ((FMDL)Parent).GetResFileU());
                 else
                     Skeleton.Export(FileName, ((FMDL)Parent).GetResFile());
             }
@@ -939,7 +940,7 @@ namespace Bfres.Structs
             if (BoneU != null)
             {
                 var skeleton = ((FSKL)skeletonParent).node.SkeletonU;
-                skeleton.Bones.Remove(BoneU.Name);
+                skeleton.Bones.RemoveKey(BoneU.Name);
                 
                 // Remove inverse matrix
                 if (skeleton.InverseModelMatrices != null && CurrentIndex < skeleton.InverseModelMatrices.Count)
@@ -1011,7 +1012,7 @@ namespace Bfres.Structs
                 if (BoneU != null)
                 {
                     BoneU = new ResU.Bone();
-                    BoneU.Import(ofd.FileName, GetResFileU());
+                    BfresWiiUImportExport.ImportSection(ofd.FileName, BoneU, GetResFileU());
                     BoneU.Name = CheckDuplicateBoneNames(BoneU.Name);
                     BoneU.SmoothMatrixIndex = -1;
                     BoneU.RigidMatrixIndex = -1;
@@ -1073,7 +1074,7 @@ namespace Bfres.Structs
             {
                 default:
                     if (BoneU != null)
-                        BoneU.Export(FileName, GetResFileU());
+                        BfresWiiUImportExport.ExportSection(FileName, BoneU, GetResFileU());
                     else
                         Bone.Export(FileName, GetResFile());
                     break;
@@ -1089,7 +1090,7 @@ namespace Bfres.Structs
             {
                 if (BoneU != null)
                 {
-                    BoneU.Import(ofd.FileName, GetResFileU());
+                    BfresWiiUImportExport.ImportSection(ofd.FileName, BoneU, GetResFileU());
                     BoneU.Name = Text;
                 }
                 else
