@@ -150,10 +150,6 @@
     <Reference Include="Syroot.Maths">
       <HintPath>..\Toolbox\Lib\Syroot.Maths.dll</HintPath>
     </Reference>
-    <Reference Include="Syroot.NintenTools.Bfres">
-      <HintPath>..\Toolbox\Lib\Syroot.NintenTools.Bfres.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Syroot.NintenTools.MarioKart8">
       <HintPath>..\Toolbox\Lib\Syroot.NintenTools.MarioKart8.dll</HintPath>
       <Private>False</Private>

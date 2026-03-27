@@ -48,10 +48,6 @@
       <HintPath>..\Toolbox\Lib\Syroot.Maths.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Syroot.NintenTools.Bfres, Version=1.2.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Toolbox\Lib\Syroot.NintenTools.Bfres.dll</HintPath>
-    </Reference>
     <Reference Include="Syroot.NintenTools.NSW.Bfres, Version=1.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Toolbox\Lib\Syroot.NintenTools.NSW.Bfres.dll</HintPath>
