@@ -1168,7 +1168,7 @@ namespace FirstPlugin
                 animFolder.Nodes.Add(group);
 
                 for (int i = 0; i < resFileU.MatVisibilityAnims.Count; i++)
-                    group.AddNode(new FVIS(resFileU.MatVisibilityAnims[i]));
+                    group.AddNode(new FSHU(resFileU.MatVisibilityAnims[i], MaterialAnimation.AnimationType.Visibilty));
             }
             if (resFileU.SceneAnims.Count > 0)
             {
@@ -1462,10 +1462,13 @@ namespace FirstPlugin
                             }
                             else
                             {
-                                resFileTex2.Textures[tex.Text].MipData = tex.texture.MipData;
-                                resFileTex2.Textures[tex.Text].MipOffsets = tex.texture.MipOffsets;
-                                resFileTex2.Textures[tex.Text].MipCount = tex.texture.MipCount;
-                                resFileTex2.Textures[tex.Text].Swizzle = tex.Tex2Swizzle;
+                                var wiiuTex = resFileTex2.Textures[tex.Text] as ResU.WiiU.Texture;
+                                if (wiiuTex != null) {
+                                    wiiuTex.MipData = tex.texture.MipData;
+                                    wiiuTex.MipOffsets = tex.texture.MipOffsets;
+                                    wiiuTex.MipCount = tex.texture.MipCount;
+                                    wiiuTex.Swizzle = tex.Tex2Swizzle;
+                                }
                             }
 
                             curTex++;
@@ -1508,9 +1511,12 @@ namespace FirstPlugin
                 {
                     if (resFileTex2.Textures.ContainsKey(tex.Text))
                     {
-                        resFileTex2.Textures[tex.Text].MipData = tex.texture.MipData;
-                        resFileTex2.Textures[tex.Text].MipOffsets = tex.texture.MipOffsets;
-                        resFileTex2.Textures[tex.Text].MipCount = tex.texture.MipCount;
+                        var wiiuTex2 = resFileTex2.Textures[tex.Text] as ResU.WiiU.Texture;
+                        if (wiiuTex2 != null) {
+                            wiiuTex2.MipData = tex.texture.MipData;
+                            wiiuTex2.MipOffsets = tex.texture.MipOffsets;
+                            wiiuTex2.MipCount = tex.texture.MipCount;
+                        }
                     }
                 }
             }

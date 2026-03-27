@@ -7,8 +7,8 @@ using Toolbox.Library;
 using Toolbox.Library.NodeWrappers;
 using Toolbox.Library.Rendering;
 using Toolbox.Library.Forms;
-using ResU = Syroot.NintenTools.Bfres;
-using ResUGX2 = Syroot.NintenTools.Bfres.GX2;
+using ResU = BfresLibrary;
+using ResUGX2 = BfresLibrary.GX2;
 using ResGFX = Syroot.NintenTools.NSW.Bfres.GFX;
 using FirstPlugin;
 using FirstPlugin.Forms;
@@ -666,7 +666,7 @@ namespace Bfres.Structs
                     {
                         var shpS = new ResU.Shape();
                         var vertexBufferU = new ResU.VertexBuffer();
-                        shpS.Import(FileName, vertexBufferU, resFileU);
+                        shpS.Import(FileName, resFileU);
 
                         FSHP shapeS = new FSHP();
                         shapeS.ShapeU = shpS;

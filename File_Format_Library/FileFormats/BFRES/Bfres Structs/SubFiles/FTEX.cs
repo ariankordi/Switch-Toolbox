@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Toolbox.Library;
 using Toolbox.Library.Forms;
-using Syroot.NintenTools.Bfres;
-using Syroot.NintenTools.Bfres.GX2;
+using BfresLibrary;
+using BfresLibrary.GX2;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using Toolbox.Library.IO;
 using FirstPlugin;
 using FirstPlugin.Forms;
+using BfresLibrary.WiiU;
 
 namespace Bfres.Structs
 {
@@ -557,12 +558,14 @@ namespace Bfres.Structs
 
             Console.WriteLine((ResFileTexture2.Textures.ContainsKey(texture.Name)));
 
-            if (ResFileTexture2.Textures.ContainsKey(texture.Name))
+            Texture tex;
+            if (ResFileTexture2.Textures.ContainsKey(texture.Name)
+                && (tex = ResFileTexture2.Textures[texture.Name] as Texture) != null)
             {
-                texture.MipCount = ResFileTexture2.Textures[texture.Name].MipCount;
-                texture.MipData = ResFileTexture2.Textures[texture.Name].MipData;
-                texture.MipOffsets = ResFileTexture2.Textures[texture.Name].MipOffsets;
-                Tex2Swizzle = ResFileTexture2.Textures[texture.Name].Swizzle;
+                texture.MipCount = tex.MipCount;
+                texture.MipData = tex.MipData;
+                texture.MipOffsets = tex.MipOffsets;
+                Tex2Swizzle = tex.Swizzle;
             }
         }
 

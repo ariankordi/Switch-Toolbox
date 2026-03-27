@@ -7,8 +7,8 @@ using System.Windows.Forms;
 using Toolbox.Library;
 using Toolbox.Library.Rendering;
 using Toolbox.Library.Forms;
-using ResU = Syroot.NintenTools.Bfres;
-using ResUGX2 = Syroot.NintenTools.Bfres.GX2;
+using ResU = BfresLibrary;
+using ResUGX2 = BfresLibrary.GX2;
 using ResGFX = Syroot.NintenTools.NSW.Bfres.GFX;
 using FirstPlugin;
 using FirstPlugin.Forms;
@@ -899,7 +899,7 @@ namespace Bfres.Structs
         public void ExportBinaryObject(string FileName)
         {
             if (IsWiiU)
-                ShapeU.Export(FileName,VertexBufferU, GetResFileU());
+                ShapeU.Export(FileName, GetResFileU());
             else
                 Shape.Export(FileName, GetResFile());
         }
@@ -926,7 +926,7 @@ namespace Bfres.Structs
                         if (IsWiiU)
                         {
                             var shp = new ResU.Shape();
-                            shp.Import(ofd.FileName, VertexBufferU, GetResFileU());
+                            shp.Import(ofd.FileName, GetResFileU());
                             shp.Name = Text;
                             shp.MaterialIndex = (ushort)MaterialIndex;
                             BfresWiiU.ReadShapesVertices(this, shp, VertexBufferU, GetParentModel());

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ResU = Syroot.NintenTools.Bfres;
+using ResU = BfresLibrary;
 using ResNX = Syroot.NintenTools.NSW.Bfres;
 using ResGFXBNTX = Syroot.NintenTools.NSW.Bntx.GFX;
 using Syroot.NintenTools.NSW.Bntx;
+using BfresLibrary;
 
 namespace FirstPlugin
 {
@@ -73,15 +74,15 @@ namespace FirstPlugin
             return matAnim;
         }
         
-        public static ResU.ShaderParamAnim FSHUConvertSwitchToWiiU(ResNX.MaterialAnim materialAnim)
+        public static ResU.MaterialAnim FSHUConvertSwitchToWiiU(ResNX.MaterialAnim materialAnim)
         {
-            var shaderParamAnim = new ResU.ShaderParamAnim();
+            var shaderParamAnim = new ResU.MaterialAnim();
             shaderParamAnim.Name = materialAnim.Name;
             shaderParamAnim.Path = materialAnim.Path;
             shaderParamAnim.BindIndices = materialAnim.BindIndices;
             shaderParamAnim.FrameCount = materialAnim.FrameCount;
             if (materialAnim.Loop)
-                shaderParamAnim.Flags |= ResU.ShaderParamAnimFlags.Looping;
+                shaderParamAnim.Flags |= ResU.MaterialAnim.MaterialAnimFlags.Looping;
 
             for (int m = 0; m < materialAnim.MaterialAnimDataList.Count; m++)
             {
@@ -90,8 +91,8 @@ namespace FirstPlugin
                 if (materialAnim.MaterialAnimDataList[m].Curves == null)
                     materialAnim.MaterialAnimDataList[m].Curves = new List<ResNX.AnimCurve>();
 
-                ResU.ShaderParamMatAnim matAnimData = new ResU.ShaderParamMatAnim();
-                shaderParamAnim.ShaderParamMatAnims.Add(matAnimData);
+                ResU.MaterialAnimData matAnimData = new ResU.MaterialAnimData();
+                shaderParamAnim.MaterialAnimDataList.Add(matAnimData);
                 matAnimData.Name = materialAnim.MaterialAnimDataList[m].Name;
                 matAnimData.Curves = ConvertAnimCurveSwitchToWiiU(materialAnim.MaterialAnimDataList[m].Curves);
 
@@ -123,7 +124,7 @@ namespace FirstPlugin
             return shaderParamAnim;
         }
 
-        public static ResNX.MaterialAnim FSHUConvertWiiUToSwitch(ResU.ShaderParamAnim ShaderAnim)
+        public static ResNX.MaterialAnim FSHUConvertWiiUToSwitch(ResU.MaterialAnim ShaderAnim)
         {
             ResNX.MaterialAnim matAnim = new ResNX.MaterialAnim();
             matAnim.Name = ShaderAnim.Name;
@@ -131,15 +132,15 @@ namespace FirstPlugin
             matAnim.FrameCount = ShaderAnim.FrameCount;
             matAnim.BindIndices = ShaderAnim.BindIndices;
             matAnim.BakedSize = ShaderAnim.BakedSize;
-            matAnim.Loop = ShaderAnim.Flags.HasFlag(ResU.ShaderParamAnimFlags.Looping);
+            matAnim.Loop = ShaderAnim.Flags.HasFlag(ResU.MaterialAnim.MaterialAnimFlags.Looping);
 
             int CurveIndex = 0;
-            for (int m = 0; m < ShaderAnim.ShaderParamMatAnims.Count; m++)
+            for (int m = 0; m < ShaderAnim.MaterialAnimDataList.Count; m++)
             {
                 ResNX.MaterialAnimData matAnimData = new ResNX.MaterialAnimData();
-                matAnimData.Name = ShaderAnim.ShaderParamMatAnims[m].Name;
+                matAnimData.Name = ShaderAnim.MaterialAnimDataList[m].Name;
 
-                foreach (var constantU in ShaderAnim.ShaderParamMatAnims[m].Constants)
+                foreach (var constantU in ShaderAnim.MaterialAnimDataList[m].Constants)
                 {
                     ResNX.AnimConstant constantNX = new ResNX.AnimConstant();
                     constantNX.AnimDataOffset = constantU.AnimDataOffset;
@@ -147,7 +148,7 @@ namespace FirstPlugin
                     matAnimData.Constants.Add(constantNX);
                 }
 
-                foreach (var paramU in ShaderAnim.ShaderParamMatAnims[m].ParamAnimInfos)
+                foreach (var paramU in ShaderAnim.MaterialAnimDataList[m].ParamAnimInfos)
                 {
                     ResNX.ParamAnimInfo animInfo = new ResNX.ParamAnimInfo();
                     animInfo.Name = paramU.Name;
@@ -161,9 +162,9 @@ namespace FirstPlugin
                     matAnimData.ParamAnimInfos.Add(animInfo);
                 }
 
-                if (ShaderAnim.ShaderParamMatAnims[m].Curves.Count == 0)
+                if (ShaderAnim.MaterialAnimDataList[m].Curves.Count == 0)
                 {
-                    foreach (var constant in ShaderAnim.ShaderParamMatAnims[m].Constants)
+                    foreach (var constant in ShaderAnim.MaterialAnimDataList[m].Constants)
                     {
                         //Add base values as constants
                         matAnimData.Constants.Add(new ResNX.AnimConstant()
@@ -178,7 +179,7 @@ namespace FirstPlugin
                     matAnimData.ShaderParamCurveIndex = CurveIndex++;
                     matAnimData.BeginVisalConstantIndex = 0;
 
-                    matAnimData.Curves = ConvertAnimCurveWiiUToSwitch(ShaderAnim.ShaderParamMatAnims[m].Curves);
+                    matAnimData.Curves = ConvertAnimCurveWiiUToSwitch(ShaderAnim.MaterialAnimDataList[m].Curves);
                 }
 
                 matAnim.MaterialAnimDataList.Add(matAnimData);
@@ -189,15 +190,13 @@ namespace FirstPlugin
             return matAnim;
         }
 
-        public static ResU.TexPatternAnim FTXPConvertSwitchToWiiU(ResNX.MaterialAnim materialAnim)
+        public static ResU.MaterialAnim FTXPConvertSwitchToWiiU(ResNX.MaterialAnim materialAnim)
         {
-            var texPatternAnim = new ResU.TexPatternAnim();
+            var texPatternAnim = new ResU.MaterialAnim();
 
             //Different versions use different lists
-            if (texPatternAnim.TextureRefNames == null)
-                texPatternAnim.TextureRefNames = new List<ResU.TextureRef>();
-            if (texPatternAnim.TextureRefs == null)
-                texPatternAnim.TextureRefs = new ResU.ResDict<ResU.TextureRef>();
+            if (texPatternAnim.TextureNames == null)
+                texPatternAnim.TextureNames = new ResU.ResDict<TextureRef>();
 
             texPatternAnim.Name = materialAnim.Name;
             texPatternAnim.Path = materialAnim.Path;
@@ -218,20 +217,21 @@ namespace FirstPlugin
                 }
 
                 textureRef.Name = texName;
-                texPatternAnim.TextureRefNames.Add(textureRef);
-                texPatternAnim.TextureRefs.Add(texName, textureRef);
+                texPatternAnim.TextureNames.Add(texName, textureRef);
             }
 
             for (int m = 0; m < materialAnim.MaterialAnimDataList.Count; m++)
             {
-                ResU.TexPatternMatAnim matAnimData = new ResU.TexPatternMatAnim();
-                texPatternAnim.TexPatternMatAnims.Add(matAnimData);
+                ResU.MaterialAnimData matAnimData = new ResU.MaterialAnimData();
+                texPatternAnim.MaterialAnimDataList.Add(matAnimData);
                 matAnimData.Name = materialAnim.MaterialAnimDataList[m].Name;
                 matAnimData.Curves = ConvertAnimCurveSwitchToWiiU(materialAnim.MaterialAnimDataList[m].Curves);
 
-               foreach (var constants in materialAnim.MaterialAnimDataList[m].Constants)
+                var constants = materialAnim.MaterialAnimDataList[m].Constants;
+                matAnimData.BaseDataList = new ushort[constants.Count];
+                for (int i = 0; i < constants.Count; i++)
                 {
-                    matAnimData.BaseDataList.Add((ushort)(int)constants.Value);
+                    matAnimData.BaseDataList[i] = (ushort)constants[i].Value.UInt32;
                 }
 
                 foreach (var patternInfoNX in materialAnim.MaterialAnimDataList[m].TexturePatternAnimInfos)
@@ -249,13 +249,11 @@ namespace FirstPlugin
             return texPatternAnim;
         }
 
-        public static ResNX.MaterialAnim FTXPConvertWiiUToSwitch(ResU.TexPatternAnim texPatternAnim)
+        public static ResNX.MaterialAnim FTXPConvertWiiUToSwitch(ResU.MaterialAnim texPatternAnim)
         {
             //Different versions use different lists
-            if (texPatternAnim.TextureRefNames == null)
-                texPatternAnim.TextureRefNames = new List<ResU.TextureRef>();
-            if (texPatternAnim.TextureRefs == null)
-                texPatternAnim.TextureRefs = new ResU.ResDict<ResU.TextureRef>();
+            if (texPatternAnim.TextureNames == null)
+                texPatternAnim.TextureNames = new ResU.ResDict<TextureRef>();
 
             ResNX.MaterialAnim matAnim = new ResNX.MaterialAnim();
             matAnim.Name = texPatternAnim.Name;
@@ -263,21 +261,18 @@ namespace FirstPlugin
             matAnim.FrameCount = texPatternAnim.FrameCount;
             matAnim.BindIndices = texPatternAnim.BindIndices;
             matAnim.BakedSize = texPatternAnim.BakedSize;
-            matAnim.Loop = texPatternAnim.Flags.HasFlag(ResU.TexPatternAnimFlags.Looping);
+            matAnim.Loop = texPatternAnim.Flags.HasFlag(ResU.MaterialAnim.MaterialAnimFlags.Looping);
 
-            foreach (var texRef in texPatternAnim.TextureRefNames)
-                matAnim.TextureNames.Add(texRef.Name);
-
-            foreach (var texRef in texPatternAnim.TextureRefs)
+            foreach (var texRef in texPatternAnim.TextureNames)
                 matAnim.TextureNames.Add(texRef.Key);
 
             int CurveIndex = 0;
-            for (int m = 0; m < texPatternAnim.TexPatternMatAnims.Count; m++)
+            for (int m = 0; m < texPatternAnim.MaterialAnimDataList.Count; m++)
             {
                 ResNX.MaterialAnimData matAnimData = new ResNX.MaterialAnimData();
-                matAnimData.Name = texPatternAnim.TexPatternMatAnims[m].Name;
+                matAnimData.Name = texPatternAnim.MaterialAnimDataList[m].Name;
 
-                foreach (var patternInfoU in texPatternAnim.TexPatternMatAnims[m].PatternAnimInfos)
+                foreach (var patternInfoU in texPatternAnim.MaterialAnimDataList[m].PatternAnimInfos)
                 {
                     ResNX.TexturePatternAnimInfo animInfo = new ResNX.TexturePatternAnimInfo();
                     animInfo.Name = patternInfoU.Name;
@@ -286,9 +281,9 @@ namespace FirstPlugin
                     matAnimData.TexturePatternAnimInfos.Add(animInfo);
                 }
 
-                if (texPatternAnim.TexPatternMatAnims[m].Curves.Count == 0)
+                if (texPatternAnim.MaterialAnimDataList[m].Curves.Count == 0)
                 {
-                    foreach (var baseData in texPatternAnim.TexPatternMatAnims[m].BaseDataList)
+                    foreach (var baseData in texPatternAnim.MaterialAnimDataList[m].BaseDataList)
                     {
                         //Add base values as constants
                         matAnimData.Constants.Add(new ResNX.AnimConstant()
@@ -303,7 +298,7 @@ namespace FirstPlugin
                     matAnimData.TexturePatternCurveIndex = CurveIndex++;
                     matAnimData.BeginVisalConstantIndex = 0;
 
-                    matAnimData.Curves = ConvertAnimCurveWiiUToSwitch(texPatternAnim.TexPatternMatAnims[m].Curves);
+                    matAnimData.Curves = ConvertAnimCurveWiiUToSwitch(texPatternAnim.MaterialAnimDataList[m].Curves);
                 }
 
                 matAnim.MaterialAnimDataList.Add(matAnimData);

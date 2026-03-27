@@ -475,7 +475,7 @@ namespace Bfres.Structs
                     case BRESGroupType.ShaderParamAnim:
                         if (IsWiiU)
                         {
-                            FSHU fshu = new FSHU(new ResU.ShaderParamAnim(), MaterialAnimation.AnimationType.ShaderParam);
+                            FSHU fshu = new FSHU(new ResU.MaterialAnim(), MaterialAnimation.AnimationType.ShaderParam);
                             fshu.Text = ResourceName;
                             fshu.Replace(FileName, resFileU);
                             Nodes.Add(fshu);
@@ -491,7 +491,7 @@ namespace Bfres.Structs
                     case BRESGroupType.ColorAnim:
                         if (IsWiiU)
                         {
-                            FSHU fclh = new FSHU(new ResU.ShaderParamAnim(), MaterialAnimation.AnimationType.Color);
+                            FSHU fclh = new FSHU(new ResU.MaterialAnim(), MaterialAnimation.AnimationType.Color);
                             fclh.Text = ResourceName;
                             fclh.Replace(FileName, resFileU);
                             Nodes.Add(fclh);
@@ -507,7 +507,7 @@ namespace Bfres.Structs
                     case BRESGroupType.TexSrtAnim:
                         if (IsWiiU)
                         {
-                            FSHU fsth = new FSHU(new ResU.ShaderParamAnim(), MaterialAnimation.AnimationType.TextureSrt);
+                            FSHU fsth = new FSHU(new ResU.MaterialAnim(), MaterialAnimation.AnimationType.TextureSrt);
                             fsth.Text = ResourceName;
                             fsth.Replace(FileName, resFileU);
                             Nodes.Add(fsth);
@@ -523,7 +523,7 @@ namespace Bfres.Structs
                     case BRESGroupType.TexPatAnim:
                         if (IsWiiU)
                         {
-                            FTXP ftxp = new FTXP(new ResU.TexPatternAnim());
+                            FTXP ftxp = new FTXP(new ResU.MaterialAnim());
                             ftxp.Text = ResourceName;
                             ftxp.Replace(FileName, resFileU);
                             Nodes.Add(ftxp);
@@ -542,7 +542,7 @@ namespace Bfres.Structs
                         FVIS fbnv = new FVIS();
                         fbnv.Text = ResourceName;
                         if (IsWiiU)
-                            fbnv.VisibilityAnimU = new ResU.VisibilityAnim() { Type = ResU.VisibilityAnimType.Bone };
+                            fbnv.VisibilityAnimU = new ResU.VisibilityAnim();
                         else
                             fbnv.VisibilityAnim = new ResNX.VisibilityAnim();
 
@@ -552,7 +552,7 @@ namespace Bfres.Structs
                     case BRESGroupType.MatVisAnim:
                         if (IsWiiU)
                         {
-                            FVIS fmtv = new FVIS(new ResU.VisibilityAnim() { Type = ResU.VisibilityAnimType.Material });
+                            FVIS fmtv = new FVIS(new ResU.VisibilityAnim());
                             fmtv.Text = ResourceName;
                             fmtv.Replace(FileName, resFileNX, resFileU);
                             Nodes.Add(fmtv);

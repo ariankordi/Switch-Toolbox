@@ -11,7 +11,7 @@ using Toolbox.Library.Animations;
 using Toolbox.Library;
 using Bfres.Structs;
 using Syroot.NintenTools.NSW.Bfres;
-using ResU = Syroot.NintenTools.Bfres;
+using ResU = BfresLibrary;
 
 namespace FirstPlugin.Forms
 {
@@ -49,16 +49,16 @@ namespace FirstPlugin.Forms
             TargetFTEXFolder.ImportTexture(Images, TextureName);
 
             //Now load the key data to the animation
-            ftxp.TexPatternAnim = new ResU.TexPatternAnim();
+            ftxp.TexPatternAnim = new ResU.MaterialAnim();
             ftxp.TexPatternAnim.Name = ftxp.Text;
             ftxp.TexPatternAnim.Path = "";
             ftxp.TexPatternAnim.FrameCount = Images.Length;
-            ftxp.TexPatternAnim.TextureRefs = new ResU.ResDict<ResU.TextureRef>();
+            ftxp.TexPatternAnim.TextureNames = new ResU.ResDict<ResU.TextureRef>();
             foreach (ImageKeyFrame key in Images)
             {
                 string name = $"{TextureName}{key.Frame}";
 
-                ftxp.TexPatternAnim.TextureRefs.Add($"{TextureName}{key.Frame}",
+                ftxp.TexPatternAnim.TextureNames.Add($"{TextureName}{key.Frame}",
                     new ResU.TextureRef()
                     {
                         Name = $"{name}",
@@ -66,12 +66,12 @@ namespace FirstPlugin.Forms
                     });
             }
 
-            var material = new ResU.TexPatternMatAnim();
+            var material = new ResU.MaterialAnimData();
             material.Name = "NewMaterial";
 
             material.PatternAnimInfos = new List<ResU.PatternAnimInfo>();
 
-            material.BaseDataList.Add(0);
+            material.BaseDataList = new ushort[] { 0 };
 
             ResU.PatternAnimInfo info = new ResU.PatternAnimInfo();
             info.CurveIndex = 0;
@@ -79,7 +79,7 @@ namespace FirstPlugin.Forms
             info.Name = "_a0";
             material.PatternAnimInfos.Add(info);
 
-            ftxp.TexPatternAnim.TexPatternMatAnims.Add(material);
+            ftxp.TexPatternAnim.MaterialAnimDataList.Add(material);
             ResU.AnimCurve curve = new ResU.AnimCurve();
             curve.AnimDataOffset = 0;
             curve.CurveType = ResU.AnimCurveType.StepInt;
@@ -99,7 +99,7 @@ namespace FirstPlugin.Forms
             curve.Keys = new float[(int)curve.Frames.Length, 1];
             for (int i = 0; i < (ushort)curve.Keys.Length; i++)
             {
-                int index = ftxp.TexPatternAnim.TextureRefs.IndexOf($"{TextureName}{Images[i].Frame}");
+                int index = ftxp.TexPatternAnim.TextureNames.IndexOf($"{TextureName}{Images[i].Frame}");
                 curve.Keys[i, 0] = index;
             }
 
