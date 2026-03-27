@@ -5,11 +5,12 @@ using System.Linq;
 using Syroot.NintenTools.NSW.Bfres;
 using System.Windows.Forms;
 using Toolbox.Library;
-using ResU = Syroot.NintenTools.Bfres;
+using ResU = BfresLibrary;
 using FirstPlugin; 
 using Toolbox.Library.NodeWrappers;
 using Toolbox.Library.Forms;
 using Toolbox.Library.IO;
+using BfresLibrary.Core;
 
 namespace Bfres.Structs
 {
@@ -939,7 +940,7 @@ namespace Bfres.Structs
             if (BoneU != null)
             {
                 var skeleton = ((FSKL)skeletonParent).node.SkeletonU;
-                skeleton.Bones.Remove(BoneU.Name);
+                skeleton.Bones.RemoveKey(BoneU.Name);
                 
                 // Remove inverse matrix
                 if (skeleton.InverseModelMatrices != null && CurrentIndex < skeleton.InverseModelMatrices.Count)

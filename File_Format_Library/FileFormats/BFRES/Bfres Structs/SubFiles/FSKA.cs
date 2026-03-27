@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Syroot.NintenTools.NSW.Bfres;
 using System.Windows.Forms;
 using Toolbox.Library;
-using ResU = Syroot.NintenTools.Bfres;
+using ResU = BfresLibrary;
 using FirstPlugin;
 using OpenTK;
 using GL_EditorFramework.StandardCameras;
