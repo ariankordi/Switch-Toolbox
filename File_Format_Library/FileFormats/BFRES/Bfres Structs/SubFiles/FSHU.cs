@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Toolbox.Library;
 using System.Windows.Forms;
-using Syroot.NintenTools.Bfres;
+using BfresLibrary;
 using FirstPlugin.Forms;
 using FirstPlugin;
 using Bfres.Structs;
@@ -13,7 +13,7 @@ namespace Bfres.Structs
 {
     public class FSHU : MaterialAnimation
     {
-        public ShaderParamAnim ShaderParamAnim;
+        public MaterialAnim ShaderParamAnim;
 
         public void Initialize()
         {
@@ -30,7 +30,7 @@ namespace Bfres.Structs
         public void NewMaterialAnim()
         {
             var mat = new MaterialAnimEntry("NewMaterialTarget");
-            mat.LoadMaterial(new ShaderParamMatAnim() { Name = mat.Text });
+            mat.LoadMaterial(new MaterialAnimData() { Name = mat.Text });
             Materials.Add(mat);
         }
 
@@ -105,10 +105,10 @@ namespace Bfres.Structs
             bool IsEdited = false;
 
             ShaderParamAnim.Name = Text;
-            ShaderParamAnim.ShaderParamMatAnims.Clear();
+            ShaderParamAnim.MaterialAnimDataList.Clear();
             for (int i = 0; i < Materials.Count; i++)
             {
-                ShaderParamAnim.ShaderParamMatAnims.Add(((MaterialAnimEntry)Materials[i]).SaveData(IsEdited));
+                ShaderParamAnim.MaterialAnimDataList.Add(((MaterialAnimEntry)Materials[i]).SaveData(IsEdited));
             }
         }
             
@@ -142,11 +142,11 @@ namespace Bfres.Structs
             }
         }
 
-        public FSHU(ShaderParamAnim anim, AnimationType type) {
+        public FSHU(MaterialAnim anim, AnimationType type) {
             LoadAnim(anim ,type);
         }   
 
-        public void LoadAnim(ShaderParamAnim anim, AnimationType type)
+        public void LoadAnim(MaterialAnim anim, AnimationType type)
         {
             Initialize();
 
@@ -158,7 +158,7 @@ namespace Bfres.Structs
             ShaderParamAnim = anim;
 
             Materials.Clear();
-            foreach (ShaderParamMatAnim matAnim in anim.ShaderParamMatAnims)
+            foreach (var matAnim in anim.MaterialAnimDataList)
             {
                 MaterialAnimEntry matNode = new MaterialAnimEntry(matAnim.Name);
                 matNode.materialAnimData = matAnim;
@@ -339,18 +339,18 @@ namespace Bfres.Structs
 
         public class MaterialAnimEntry : Material
         {
-            public ShaderParamMatAnim materialAnimData;
+            public MaterialAnimData materialAnimData;
 
             public MaterialAnimEntry(string name) : base(name)
             {
             }
 
-            public void LoadMaterial(ShaderParamMatAnim data)
+            public void LoadMaterial(MaterialAnimData data)
             {
                 materialAnimData = data;
             }
 
-            public ShaderParamMatAnim SaveData(bool IsEdited)
+            public MaterialAnimData SaveData(bool IsEdited)
             {
                 materialAnimData.Name = Text;
                 if (IsEdited)

@@ -790,7 +790,7 @@ namespace FirstPlugin
                 sampler.Name = textu.SamplerName;
                 mat.Samplers.Add(textu.SamplerName, sampler);
 
-                Texture texMapped = new Texture();
+                BfresLibrary.TextureShared texMapped = null;
                 resFile.Textures.TryGetValue(textu.Name, out texMapped);
                 texref.Texture = texMapped;
 

@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using FirstPlugin;
 using FirstPlugin.Forms;
-using Syroot.NintenTools.Bfres;
+using BfresLibrary;
 using Toolbox.Library;
 using Toolbox.Library.Animations;
 
@@ -11,7 +11,7 @@ namespace Bfres.Structs
 {
     public class FTXP : MaterialAnimation
     {
-        public TexPatternAnim TexPatternAnim;
+        public MaterialAnim TexPatternAnim;
 
         public override void OnClick(TreeView treeView) => UpdateEditor();
 
@@ -23,18 +23,18 @@ namespace Bfres.Structs
             return ((BFRESGroupNode)Parent).GetResFileU();
         }
 
-        public FTXP(TexPatternAnim anim) { LoadAnim(anim); }
+        public FTXP(MaterialAnim anim) { LoadAnim(anim); }
 
         public void UpdateMaterialBinds()
         {
-            ushort[] binds = new ushort[TexPatternAnim.TexPatternMatAnims.Count];
+            ushort[] binds = new ushort[TexPatternAnim.MaterialAnimDataList.Count];
             for (int i = 0; i < binds.Length; i++)
                 binds[i] = ushort.MaxValue;
 
             TexPatternAnim.BindIndices = binds;
         }
 
-        private void LoadAnim(TexPatternAnim anim)
+        private void LoadAnim(MaterialAnim anim)
         {
             CanReplace = true;
             CanExport = true;
@@ -48,20 +48,15 @@ namespace Bfres.Structs
 
             Materials.Clear();
             Textures.Clear();
-            if (anim.TextureRefNames != null)
-            {
-                foreach (var tex in anim.TextureRefNames)
-                    Textures.Add(tex.Name);
-            }
 
-            if (anim.TextureRefs != null)
+            if (anim.TextureNames != null)
             {
-                foreach (var tex in anim.TextureRefs)
+                foreach (var tex in anim.TextureNames)
                     Textures.Add(tex.Key);
             }
 
 
-            foreach (TexPatternMatAnim matanim in anim.TexPatternMatAnims)
+            foreach (MaterialAnimData matanim in anim.MaterialAnimDataList)
             {
                 var mat = new MaterialAnimEntry(matanim.Name);
                 mat.TexPatternMatAnim = matanim;
@@ -101,30 +96,30 @@ namespace Bfres.Structs
         public void SaveAnimData()
         {
             TexPatternAnim.Name = Text;
-            TexPatternAnim.TexPatternMatAnims.Clear();
+            TexPatternAnim.TextureNames.Clear();
 
             bool IsEdited = false;
 
             for (int i = 0; i < Materials.Count; i++)
             {
-                TexPatternAnim.TexPatternMatAnims.Add(((MaterialAnimEntry)Materials[i]).SaveData(IsEdited));
+                TexPatternAnim.MaterialAnimDataList.Add(((MaterialAnimEntry)Materials[i]).SaveData(IsEdited));
             }
         }
 
         public class MaterialAnimEntry : Material
         {
-            public TexPatternMatAnim TexPatternMatAnim;
+            public MaterialAnimData TexPatternMatAnim;
 
             public MaterialAnimEntry(string name) : base(name)
             {
             }
 
-            public void LoadMaterial(TexPatternMatAnim data)
+            public void LoadMaterial(MaterialAnimData data)
             {
                 TexPatternMatAnim = data;
             }
 
-            public TexPatternMatAnim SaveData(bool IsEdited)
+            public MaterialAnimData SaveData(bool IsEdited)
             {
                 TexPatternMatAnim.Name = Text;
                 if (IsEdited)

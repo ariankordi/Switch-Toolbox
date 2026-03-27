@@ -290,7 +290,7 @@ namespace Bfres.Structs
             if (IsWiiU)
             {
                 group = GetOrCreateFolder<FSHU>(type);
-                FSHU fshu = new FSHU(new ResU.ShaderParamAnim(), type);
+                FSHU fshu = new FSHU(new ResU.MaterialAnim(), type);
                 group.AddNode(fshu, "NewShaderParamAnim_fsp");
             }
             else
@@ -311,7 +311,7 @@ namespace Bfres.Structs
             if (IsWiiU)
             {
                 group = GetOrCreateFolder<FSHU>(type);
-                FSHU fshu = new FSHU(new ResU.ShaderParamAnim(), type);
+                FSHU fshu = new FSHU(new ResU.MaterialAnim(), type);
                 group.AddNode(fshu, "NewColorAnim_fcl");
             }
             else
@@ -332,7 +332,7 @@ namespace Bfres.Structs
             if (IsWiiU)
             {
                 group = GetOrCreateFolder<FSHU>(type);
-                FSHU fshu = new FSHU(new ResU.ShaderParamAnim(), type);
+                FSHU fshu = new FSHU(new ResU.MaterialAnim(), type);
                 group.AddNode(fshu, "NewTextureTransformAnim_fts");
             }
             else
@@ -353,7 +353,7 @@ namespace Bfres.Structs
             if (IsWiiU)
             {
                 group = GetOrCreateFolder<FTXP>();
-                FTXP anim = new FTXP(new ResU.TexPatternAnim());
+                FTXP anim = new FTXP(new ResU.MaterialAnim());
                 group.AddNode(anim, "NewTexturePatternAnim_ftp");
             }
             else
@@ -373,7 +373,7 @@ namespace Bfres.Structs
             FVIS anim = null;
             if (IsWiiU)
             {
-                anim = new FVIS(new ResU.VisibilityAnim() { Type = ResU.VisibilityAnimType.Bone });
+                anim = new FVIS(new ResU.VisibilityAnim());
             }
             else
             {
@@ -390,7 +390,7 @@ namespace Bfres.Structs
             if (IsWiiU)
             {
                 group = GetOrCreateFolder<FVIS>(VisibiltyAnimType.Material);
-                FVIS anim = new FVIS(new ResU.VisibilityAnim() { Type = ResU.VisibilityAnimType.Material });
+                FVIS anim = new FVIS(new ResU.VisibilityAnim());
                 group.AddNode(anim, "NewMatVisAnim_fvm");
             }
             else
