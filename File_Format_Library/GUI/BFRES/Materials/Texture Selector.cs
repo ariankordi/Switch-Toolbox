@@ -9,7 +9,7 @@ using System.Threading;
 using System.Windows.Forms;
 using Toolbox.Library;
 using Bfres.Structs;
-using ResU = Syroot.NintenTools.Bfres;
+using ResU = BfresLibrary;
 using ResNX = Syroot.NintenTools.NSW.Bfres;
 
 namespace FirstPlugin
@@ -168,7 +168,7 @@ namespace FirstPlugin
                 string ResourceName = Path.GetFileNameWithoutExtension(ofd.FileName);
 
                 FTEX ftex = new FTEX();
-                ftex.texture = new ResU.Texture();
+                ftex.texture = new ResU.WiiU.Texture();
                 ftex.Text = ResourceName;
                 ftex.Replace(ofd.FileName);
 

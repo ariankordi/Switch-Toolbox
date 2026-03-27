@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Threading.Tasks;
 using Toolbox.Library;
 using Toolbox.Library.IO;
-using Syroot.NintenTools.Bfres.GX2;
+using BfresLibrary.GX2;
 using Bfres.Structs;
 
 namespace FirstPlugin

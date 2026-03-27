@@ -9,7 +9,7 @@ using Toolbox.Library;
 using Toolbox.Library.IO;
 using Toolbox.Library.Forms;
 using System.Drawing;
-using Syroot.NintenTools.Bfres.GX2;
+using BfresLibrary.GX2;
 
 namespace FirstPlugin
 {

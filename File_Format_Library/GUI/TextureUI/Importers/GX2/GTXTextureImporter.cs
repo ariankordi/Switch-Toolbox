@@ -208,7 +208,7 @@ namespace FirstPlugin
 
                 bitmap = FTEX.DecodeBlockGetBitmap(mips[0], setting.
                 TexWidth, setting.TexHeight, FTEX.ConvertFromGx2Format(
-                    (Syroot.NintenTools.Bfres.GX2.GX2SurfaceFormat)setting.Format), new byte[0]);
+                    (BfresLibrary.GX2.GX2SurfaceFormat)setting.Format), new byte[0]);
 
 
                 if (setting.FlipY)

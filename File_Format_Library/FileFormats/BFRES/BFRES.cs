@@ -9,7 +9,7 @@ using Toolbox.Library;
 using Toolbox.Library.Forms;
 using Toolbox.Library.IO;
 using Bfres.Structs;
-using ResU = Syroot.NintenTools.Bfres;
+using ResU = BfresLibrary;
 using Syroot.NintenTools.NSW.Bfres;
 using Toolbox.Library.Animations;
 using Toolbox.Library.NodeWrappers;
@@ -829,7 +829,7 @@ namespace FirstPlugin
 
             if (IsWiiU)
             {
-                LoadFile(new Syroot.NintenTools.Bfres.ResFile(stream));
+                LoadFile(new BfresLibrary.ResFile(stream));
             }
             else
             {
@@ -2053,9 +2053,9 @@ namespace FirstPlugin
                         }
                         else
                         {
-                            Syroot.NintenTools.Bfres.VertexBuffer vtx = shp.VertexBufferU;
-                            Syroot.NintenTools.Bfres.Material mat = shp.GetFMAT().MaterialU;
-                            Syroot.NintenTools.Bfres.ShaderAssign shdr = mat.ShaderAssign;
+                            BfresLibrary.VertexBuffer vtx = shp.VertexBufferU;
+                            BfresLibrary.Material mat = shp.GetFMAT().MaterialU;
+                            BfresLibrary.ShaderAssign shdr = mat.ShaderAssign;
 
                             for (int att = 0; att < vtx.Attributes.Count; att++)
                             {

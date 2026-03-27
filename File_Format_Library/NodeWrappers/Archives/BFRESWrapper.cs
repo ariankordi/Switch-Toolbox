@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Toolbox.Library.NodeWrappers;
 using Toolbox.Library;
 using System.Windows.Forms;
-using ResU = Syroot.NintenTools.Bfres;
+using ResU = BfresLibrary;
 using ResNX = Syroot.NintenTools.NSW.Bfres;
 using Bfres.Structs;
 

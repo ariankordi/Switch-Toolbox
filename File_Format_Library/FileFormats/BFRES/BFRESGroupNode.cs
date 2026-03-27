@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using System.IO;
 using System;
 using FirstPlugin;
-using ResU = Syroot.NintenTools.Bfres;
+using ResU = BfresLibrary;
 using ResNX = Syroot.NintenTools.NSW.Bfres;
 using Toolbox.Library.Animations;
 using Toolbox.Library.Forms;
@@ -183,7 +183,7 @@ namespace Bfres.Structs
 
                                 if (ext == ".bftex")
                                 {
-                                    ftex.texture = new ResU.Texture();
+                                    ftex.texture = new ResU.WiiU.Texture();
                                     ftex.texture.Import(file, GetResFileU());
                                     ftex.IsEdited = true;
                                     ftex.Read(ftex.texture);
@@ -739,7 +739,7 @@ namespace Bfres.Structs
                 if (ext == ".bftex")
                 {
                     FTEX ftex = new FTEX();
-                    ftex.texture = new ResU.Texture();
+                    ftex.texture = new ResU.WiiU.Texture();
                     ftex.texture.Import(name, GetResFileU());
                     ftex.IsEdited = true;
                     ftex.Read(ftex.texture);
@@ -748,7 +748,7 @@ namespace Bfres.Structs
                 else if (ext == ".dds" || ext == ".dds2")
                 {
                     FTEX ftex = new FTEX();
-                    ftex.texture = new ResU.Texture();
+                    ftex.texture = new ResU.WiiU.Texture();
 
                     GTXImporterSettings setting = FTEX.SetImporterSettings(name);
 
@@ -809,7 +809,7 @@ namespace Bfres.Structs
                 if (setting.DataBlockOutput != null)
                 {
                     FTEX ftex = new FTEX();
-                    ftex.texture = new ResU.Texture();
+                    ftex.texture = new ResU.WiiU.Texture();
                     var surface = GTXSwizzle.CreateGx2Texture(setting.DataBlockOutput[0], setting);
                     var tex = FTEX.FromGx2Surface(surface, setting.TexName);
                     ftex.UpdateTex(tex);
@@ -886,7 +886,7 @@ namespace Bfres.Structs
 
             var surface = GTXSwizzle.CreateGx2Texture(setting.DataBlockOutput[0], setting);
             FTEX ftex = new FTEX();
-            ftex.texture = new ResU.Texture();
+            ftex.texture = new ResU.WiiU.Texture();
             ftex.texture = FTEX.FromGx2Surface(surface, setting.TexName);
             ftex.IsEdited = true;
             ftex.Read(ftex.texture);
