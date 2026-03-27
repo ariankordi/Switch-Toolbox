@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Syroot.NintenTools.Bfres;
-using Syroot.NintenTools.Bfres.GX2;
+using BfresLibrary;
+using BfresLibrary.GX2;
 
 namespace FirstPlugin.Forms
 {

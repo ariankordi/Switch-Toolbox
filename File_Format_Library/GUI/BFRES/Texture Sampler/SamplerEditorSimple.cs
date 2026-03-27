@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using Bfres.Structs;
-using ResUGX2 = Syroot.NintenTools.Bfres.GX2;
+using ResUGX2 = BfresLibrary.GX2;
 using Syroot.NintenTools.NSW.Bfres;
 using Toolbox.Library;
 

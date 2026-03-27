@@ -19,7 +19,7 @@ using Toolbox.Library.Forms;
 using Toolbox.Library.IO;
 using Toolbox.Library.NodeWrappers;
 using ZeldaLib.IO;
-using ResU = Syroot.NintenTools.Bfres;
+using ResU = BfresLibrary;
 
 namespace FirstPlugin
 {
@@ -835,7 +835,7 @@ namespace FirstPlugin
 
             if (IsWiiU)
             {
-                LoadFile(new Syroot.NintenTools.Bfres.ResFile(stream));
+                LoadFile(new BfresLibrary.ResFile(stream));
             }
             else
             {
@@ -2150,9 +2150,9 @@ namespace FirstPlugin
                         }
                         else
                         {
-                            Syroot.NintenTools.Bfres.VertexBuffer vtx = shp.VertexBufferU;
-                            Syroot.NintenTools.Bfres.Material mat = shp.GetFMAT().MaterialU;
-                            Syroot.NintenTools.Bfres.ShaderAssign shdr = mat.ShaderAssign;
+                            BfresLibrary.VertexBuffer vtx = shp.VertexBufferU;
+                            BfresLibrary.Material mat = shp.GetFMAT().MaterialU;
+                            BfresLibrary.ShaderAssign shdr = mat.ShaderAssign;
 
                             for (int att = 0; att < vtx.Attributes.Count; att++)
                             {

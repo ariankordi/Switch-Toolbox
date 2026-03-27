@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Toolbox.Library;
-using Syroot.NintenTools.Bfres.GX2;
+using BfresLibrary.GX2;
 
 namespace FirstPlugin
 {

@@ -7,7 +7,7 @@ using Bfres.Structs;
 using Toolbox.Library.Forms;
 using Toolbox.Library.Rendering;
 using Syroot.NintenTools.NSW.Bfres;
-using ResU = Syroot.NintenTools.Bfres;
+using ResU = BfresLibrary;
 
 namespace FirstPlugin
 {

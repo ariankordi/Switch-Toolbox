@@ -31,7 +31,7 @@ namespace FirstPlugin
             return resFile;
         }
 
-        public static Texture WiiUToSwicthBNTXTexture(ResU.Texture textureU)
+        public static Texture WiiUToSwicthBNTXTexture(ResU.WiiU.Texture textureU)
         {
             Texture texture = new Texture();
             texture.Height = textureU.Height;
@@ -59,7 +59,7 @@ namespace FirstPlugin
             matAnim.FrameCount = VisualAnim.FrameCount;
             matAnim.BindIndices = VisualAnim.BindIndices;
             matAnim.BakedSize = VisualAnim.BakedSize;
-            matAnim.Loop = VisualAnim.Flags.HasFlag(ResU.TexPatternAnimFlags.Looping);
+            matAnim.Loop = VisualAnim.Flags.HasFlag(ResU.MaterialAnim.MaterialAnimFlags.Looping);
 
             int CurveIndex = 0;
             for (int m = 0; m < VisualAnim.Names.Count; m++)
@@ -205,12 +205,12 @@ namespace FirstPlugin
             texPatternAnim.FrameCount = materialAnim.FrameCount;
 
             if (materialAnim.Loop)
-                texPatternAnim.Flags |= ResU.TexPatternAnimFlags.Looping;
+                texPatternAnim.Flags |= ResU.MaterialAnim.MaterialAnimFlags.Looping;
 
             //Fill both lists. On save only one will be used depending on version
             foreach (var texName in materialAnim.TextureNames)
             {
-                var textureRef = new ResU.TextureRef();
+                var textureRef = new TextureRef();
                 foreach (var container in PluginRuntime.ftexContainers) {
                     if (container.ResourceNodes.ContainsKey(texName)) {
                         textureRef.Texture = ((Bfres.Structs.FTEX)container.ResourceNodes[texName]).texture;

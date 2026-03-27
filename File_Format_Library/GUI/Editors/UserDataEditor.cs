@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Syroot.NintenTools.Bfres;
+using BfresLibrary;
 using ResNX = Syroot.NintenTools.NSW.Bfres;
 using ResBNTX = Syroot.NintenTools.NSW.Bntx;
 

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System.Threading.Tasks;
-using Syroot.NintenTools.Bfres;
-using Syroot.NintenTools.Bfres.Helpers;
-using Syroot.NintenTools.Bfres.GX2;
+using BfresLibrary;
+using BfresLibrary.Helpers;
+using BfresLibrary.GX2;
 using System.Windows.Forms;
 using Bfres.Structs;
 using Toolbox.Library.IO;
@@ -13,6 +13,7 @@ using Toolbox.Library;
 using Toolbox.Library.Rendering;
 using OpenTK;
 using ResNSW = Syroot.NintenTools.NSW.Bfres;
+using BfresLibrary.WiiU;
 
 namespace FirstPlugin
 {
@@ -935,7 +936,7 @@ namespace FirstPlugin
                 }
 
                 IList<uint> faceList = new List<uint>();
-                msh.IndexBuffer = new Syroot.NintenTools.Bfres.Buffer();
+                msh.IndexBuffer = new BfresLibrary.Buffer();
                 foreach (int f in mesh.faces)
                 {
                     faceList.Add((uint)f);

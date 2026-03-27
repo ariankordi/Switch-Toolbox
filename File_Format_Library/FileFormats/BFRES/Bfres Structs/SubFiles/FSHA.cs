@@ -6,7 +6,7 @@ using Toolbox.Library.Animations;
 using Toolbox.Library.NodeWrappers;
 using FirstPlugin;
 using Syroot.NintenTools.NSW.Bfres;
-using ResU = Syroot.NintenTools.Bfres;
+using ResU = BfresLibrary;
 
 namespace Bfres.Structs
 {

@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Data;
 using System.Linq;
-using ResU = Syroot.NintenTools.Bfres;
+using ResU = BfresLibrary;
 using Syroot.NintenTools.NSW.Bfres;
 using System.Threading.Tasks;
 using System.Windows.Forms;

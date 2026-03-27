@@ -9,7 +9,7 @@ using System.Threading;
 using System.Windows.Forms;
 using Toolbox.Library.Forms;
 using Bfres.Structs;
-using ResUGX2 = Syroot.NintenTools.Bfres.GX2;
+using ResUGX2 = BfresLibrary.GX2;
 using ResGFX = Syroot.NintenTools.NSW.Bfres.GFX;
 
 namespace FirstPlugin.Forms

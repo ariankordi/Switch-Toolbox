@@ -10,8 +10,8 @@ using Switch_Toolbox.Library.Rendering;
 using WeifenLuo.WinFormsUI.Docking;
 using Switch_Toolbox.Library.IO;
 using Switch_Toolbox.Library.Forms;
-using ResU = Syroot.NintenTools.Bfres;
-using ResUGX2 = Syroot.NintenTools.Bfres.GX2;
+using ResU = BfresLibrary;
+using ResUGX2 = BfresLibrary.GX2;
 using ResGFX = Syroot.NintenTools.NSW.Bfres.GFX;
 using FirstPlugin;
 

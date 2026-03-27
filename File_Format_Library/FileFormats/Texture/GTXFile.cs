@@ -400,7 +400,7 @@ namespace FirstPlugin
 
                     tex.surface.data = data[curTex];
                     tex.surface.bpp = GX2.surfaceGetBitsPerPixel(tex.surface.format) >> 3;
-                    tex.Format = FTEX.ConvertFromGx2Format((Syroot.NintenTools.Bfres.GX2.GX2SurfaceFormat)tex.surface.format);
+                    tex.Format = FTEX.ConvertFromGx2Format((BfresLibrary.GX2.GX2SurfaceFormat)tex.surface.format);
                     tex.Width = tex.surface.width;
                     tex.Height = tex.surface.height;
 
@@ -745,7 +745,7 @@ namespace FirstPlugin
                     surface.pitch = ftex.texture.Pitch;
                     surface.texRegs = GX2.CreateRegisters(surface);
 
-                    Format = FTEX.ConvertFromGx2Format((Syroot.NintenTools.Bfres.GX2.GX2SurfaceFormat)surface.format);
+                    Format = FTEX.ConvertFromGx2Format((BfresLibrary.GX2.GX2SurfaceFormat)surface.format);
                     Width = surface.width;
                     Height = surface.height;
                     MipCount = surface.numMips;

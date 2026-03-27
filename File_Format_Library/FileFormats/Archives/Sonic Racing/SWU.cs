@@ -210,10 +210,10 @@ namespace FirstPlugin
                     GX2Surface.compSel = reader.ReadBytes(4);
                     GX2Surface.texRegs = reader.ReadUInt32s(4);
 
-                    RedChannel = GX2ChanneToGeneric((Syroot.NintenTools.Bfres.GX2.GX2CompSel)GX2Surface.compSel[0]);
-                    GreenChannel = GX2ChanneToGeneric((Syroot.NintenTools.Bfres.GX2.GX2CompSel)GX2Surface.compSel[1]);
-                    BlueChannel = GX2ChanneToGeneric((Syroot.NintenTools.Bfres.GX2.GX2CompSel)GX2Surface.compSel[2]);
-                    AlphaChannel = GX2ChanneToGeneric((Syroot.NintenTools.Bfres.GX2.GX2CompSel)GX2Surface.compSel[3]);
+                    RedChannel = GX2ChanneToGeneric((BfresLibrary.GX2.GX2CompSel)GX2Surface.compSel[0]);
+                    GreenChannel = GX2ChanneToGeneric((BfresLibrary.GX2.GX2CompSel)GX2Surface.compSel[1]);
+                    BlueChannel = GX2ChanneToGeneric((BfresLibrary.GX2.GX2CompSel)GX2Surface.compSel[2]);
+                    AlphaChannel = GX2ChanneToGeneric((BfresLibrary.GX2.GX2CompSel)GX2Surface.compSel[3]);
 
                     if (GX2Surface.numMips > 13)
                         return;
@@ -222,16 +222,16 @@ namespace FirstPlugin
                     Height = GX2Surface.height;
                     MipCount = GX2Surface.numMips;
                     ArrayCount = GX2Surface.numArray;
-                    Format = Bfres.Structs.FTEX.ConvertFromGx2Format((Syroot.NintenTools.Bfres.GX2.GX2SurfaceFormat)GX2Surface.format);
+                    Format = Bfres.Structs.FTEX.ConvertFromGx2Format((BfresLibrary.GX2.GX2SurfaceFormat)GX2Surface.format);
             }
 
-            private STChannelType GX2ChanneToGeneric(Syroot.NintenTools.Bfres.GX2.GX2CompSel comp)
+            private STChannelType GX2ChanneToGeneric(BfresLibrary.GX2.GX2CompSel comp)
             {
-                if (comp == Syroot.NintenTools.Bfres.GX2.GX2CompSel.ChannelR) return STChannelType.Red;
-                else if (comp == Syroot.NintenTools.Bfres.GX2. GX2CompSel.ChannelG) return STChannelType.Green;
-                else if (comp == Syroot.NintenTools.Bfres.GX2.GX2CompSel.ChannelB) return STChannelType.Blue;
-                else if (comp == Syroot.NintenTools.Bfres.GX2.GX2CompSel.ChannelA) return STChannelType.Alpha;
-                else if (comp == Syroot.NintenTools.Bfres.GX2.GX2CompSel.Always0) return STChannelType.Zero;
+                if (comp == BfresLibrary.GX2.GX2CompSel.ChannelR) return STChannelType.Red;
+                else if (comp == BfresLibrary.GX2. GX2CompSel.ChannelG) return STChannelType.Green;
+                else if (comp == BfresLibrary.GX2.GX2CompSel.ChannelB) return STChannelType.Blue;
+                else if (comp == BfresLibrary.GX2.GX2CompSel.ChannelA) return STChannelType.Alpha;
+                else if (comp == BfresLibrary.GX2.GX2CompSel.Always0) return STChannelType.Zero;
                 else return STChannelType.One;
             }
 

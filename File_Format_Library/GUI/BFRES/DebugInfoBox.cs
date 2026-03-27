@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Bfres.Structs;
-using Syroot.NintenTools.Bfres;
+using BfresLibrary;
 
 namespace FirstPlugin
 {

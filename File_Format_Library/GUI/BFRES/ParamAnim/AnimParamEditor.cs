@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Syroot.NintenTools.Bfres;
+using BfresLibrary;
 using Toolbox.Library;
 using Bfres.Structs;
 using Toolbox.Library.Animations;

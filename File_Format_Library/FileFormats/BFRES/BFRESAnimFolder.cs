@@ -5,7 +5,7 @@ using Toolbox.Library.NodeWrappers;
 using Toolbox.Library.Animations;
 using Toolbox.Library.Forms;
 using Toolbox.Library;
-using ResU = Syroot.NintenTools.Bfres;
+using ResU = BfresLibrary;
 using ResNX = Syroot.NintenTools.NSW.Bfres;
 using FirstPlugin;
 

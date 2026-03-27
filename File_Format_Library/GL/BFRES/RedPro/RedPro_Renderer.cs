@@ -13,7 +13,7 @@ using Toolbox.Library;
 using Toolbox.Library.Rendering;
 using Toolbox.Library.IO;
 using Toolbox.Library.Forms;
-using ResU = Syroot.NintenTools.Bfres;
+using ResU = BfresLibrary;
 using Bfres.Structs;
 using FirstPlugin.RedPro;
 

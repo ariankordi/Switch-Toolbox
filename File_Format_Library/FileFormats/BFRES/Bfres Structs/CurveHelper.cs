@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Syroot.NintenTools.NSW.Bfres;
 using Toolbox.Library;
-using ResU = Syroot.NintenTools.Bfres;
+using ResU = BfresLibrary;
 using Toolbox.Library.Animations;
 using AampLibraryCSharp;
 using static FirstPlugin.CSAB;

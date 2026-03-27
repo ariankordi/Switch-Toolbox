@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Bfres.Structs;
-using ResU = Syroot.NintenTools.Bfres;
+using ResU = BfresLibrary;
 using Syroot.NintenTools.NSW.Bfres;
 using Toolbox.Library.Forms;
 using Toolbox.Library;
