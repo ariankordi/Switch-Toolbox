@@ -398,6 +398,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BfresLibrary\BfresLibrary\BfresLibrary.csproj">
+      <Project>{3667effe-2edd-0e18-0151-4bb51d9dc40a}</Project>
+      <Name>BfresLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\File_Format_Library\File_Format_Library.csproj">
       <Project>{a11705cf-a6a3-41c3-875a-e1cfd8080f09}</Project>
       <Name>File_Format_Library</Name>
