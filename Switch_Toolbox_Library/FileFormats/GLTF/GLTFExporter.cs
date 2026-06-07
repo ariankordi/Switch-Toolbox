@@ -25,7 +25,6 @@ namespace Toolbox.Library.GLTFModel
         private Dictionary<string, Bitmap> TextureMaps;
         private List<MaterialBuilder> Materials;
         private List<NodeBuilder> Nodes;
-        private int ArmatureCount;
 
         public GLTFExporter()
         {
@@ -34,7 +33,6 @@ namespace Toolbox.Library.GLTFModel
             TextureMaps = new Dictionary<string, Bitmap>();
             Materials = new List<MaterialBuilder>();
             Nodes = new List<NodeBuilder>();
-            ArmatureCount = 0;
         }
 
         private MaterialBuilder GetMaterial(int MaterialIndex)
@@ -224,14 +222,7 @@ namespace Toolbox.Library.GLTFModel
             if (nodeId < 0 || nodeId >= Nodes.Count || parentId >= Nodes.Count) return;
             if (parentId < 0)
             {
-                // Organize skeleton under armature node and add to scene
-                string armatureName = "Armature";
-                if (ArmatureCount > 0) armatureName += ArmatureCount++;
-
-                NodeBuilder node = new NodeBuilder(armatureName);
-                node.AddNode(Nodes[nodeId]);
-
-                Scene.AddNode(node);
+                Scene.AddNode(Nodes[nodeId]);
                 return;
             }
             Nodes[parentId].AddNode(Nodes[nodeId]);
