@@ -2208,6 +2208,10 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BfresLibrary\BfresLibrary\BfresLibrary.csproj">
+      <Project>{3667effe-2edd-0e18-0151-4bb51d9dc40a}</Project>
+      <Name>BfresLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BrawlboxHelper\BrawlboxHelper.csproj">
       <Project>{fa690685-3370-44d5-b138-f538c8d4c2a3}</Project>
       <Name>BrawlboxHelper</Name>

@@ -68,6 +68,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BfresLibrary\BfresLibrary\BfresLibrary.csproj">
+      <Project>{3667effe-2edd-0e18-0151-4bb51d9dc40a}</Project>
+      <Name>BfresLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Switch_Toolbox_Library\Toolbox_Library.csproj">
       <Project>{96820047-2a39-4e5a-bfa4-e84fff5c66cf}</Project>
       <Name>Toolbox_Library</Name>
