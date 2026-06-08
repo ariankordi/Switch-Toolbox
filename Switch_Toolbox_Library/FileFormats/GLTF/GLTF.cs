@@ -87,6 +87,9 @@ namespace Toolbox.Library
             List<STGenericObject> Meshes, List<STGenericMaterial> Materials,
             List<STGenericTexture> Textures, STSkeleton skeleton = null, List<int> NodeArray = null)
         {
+            if (skeleton != null && skeleton.BoneIndices != null)
+                NodeArray = skeleton.BoneIndices.ToList();
+
             var Exporter = new GLTFExporter();
 
             if (settings.ExportTextures)
@@ -190,7 +193,10 @@ namespace Toolbox.Library
                     float weightSum = 0;
                     for (int b = 0; b < Math.Min(vertex.boneIds.Count, mesh.VertexSkinCount); b++)
                     {
-                        int boneIndex = vertex.boneIds[b];
+                        int localIndex = vertex.boneIds[b];
+                        int boneIndex = (NodeArray != null && localIndex < NodeArray.Count)
+                            ? NodeArray[localIndex]
+                            : localIndex;
                         float boneWeight = (b < vertex.boneWeights.Count) ? vertex.boneWeights[b] : 0;
 
                         if (boneIndex >= 0 && boneIndex < skeleton?.bones.Count)
