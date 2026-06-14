@@ -143,6 +143,7 @@ namespace Toolbox.Library
                 List<Vector2> UV1 = new List<Vector2>();
                 List<Vector2> UV2 = new List<Vector2>();
                 List<Vector2> UV3 = new List<Vector2>();
+                List<Vector4> Tangents = new List<Vector4>();
                 List<SparseWeight8> Skins = new List<SparseWeight8>();
                 List<int> TriangleFaces = new List<int>();
 
@@ -153,6 +154,7 @@ namespace Toolbox.Library
                 bool HasUV1 = false;
                 bool HasUV2 = false;
                 bool HasUV3 = false;
+                bool HasTangents = false;
                 bool HasBoneIds = false;
                 int SkinsCount = 0;
 
@@ -165,10 +167,12 @@ namespace Toolbox.Library
                     if (vertex.uv1 != OpenTK.Vector2.Zero) HasUV1 = true;
                     if (vertex.uv2 != OpenTK.Vector2.Zero) HasUV2 = true;
                     if (vertex.uv3 != OpenTK.Vector2.Zero) HasUV3 = true;
+                    if (vertex.tan != OpenTK.Vector4.Zero) HasTangents = true;
                     if (vertex.boneIds.Count > 0) HasBoneIds = true;
 
                     Vertices.Add(new Vector3(vertex.pos.X, vertex.pos.Y, vertex.pos.Z));
                     Normals.Add(new Vector3(vertex.nrm.X, vertex.nrm.Y, vertex.nrm.Z));
+                    Tangents.Add(new Vector4(vertex.tan.X, vertex.tan.Y, vertex.tan.Z, vertex.tan.W));
 
                     if (settings.FlipTexCoordsVertical)
                     {
@@ -276,7 +280,9 @@ namespace Toolbox.Library
 
                 Exporter.AddMesh(meshName, mesh.MaterialIndex,
                     Vertices, Normals, Colors0, Colors1,
-                    UV0, UV1, UV2, UV3, Skins, TriangleFaces,
+                    UV0, UV1, UV2, UV3, Skins,
+                    HasTangents ? Tangents : null,
+                    TriangleFaces,
                     ColorsCount, UVCount, SkinsCount);
             }
 
