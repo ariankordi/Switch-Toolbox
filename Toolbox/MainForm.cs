@@ -1733,23 +1733,51 @@ namespace Toolbox
                 var bfres = fileFormat as BFRES;
                 string path = Path.Combine(outputFolder, bfres.Text);
                 Directory.CreateDirectory(path);
-                foreach (var elem in bfres.resFileU.SkeletalAnims)
+                if (bfres.resFileU != null)
                 {
-                    string name = elem.Key;
-                    var skelanim = elem.Value;
-                    FSKA exportableAnim = new FSKA(skelanim);
-                    // It matters for .seanim and .smd export what skeleton is used for the animation.
-                    // We pass the skeleton included with the .bfres file here, so later code can
-                    // use it as a backup in case no matching skeleton was found in the viewport.
-                    STSkeleton backupSkeleton = null;
-                    if (bfres.BFRESRender.models.Count > 0)
-                        backupSkeleton = bfres.BFRESRender.models[0].Skeleton;
-                    try
+                    foreach (var elem in bfres.resFileU.SkeletalAnims)
                     {
-                        exportableAnim.Export($"{path}/{name}.{extension}", backupSkeleton);
-                    } catch (Exception ex) {
-                        failedExports.Add($"\n{Path.GetFileName(bfres.FilePath)} -> {ex.Message}");
+                        string name = elem.Key;
+                        var skelanim = elem.Value;
+                        FSKA exportableAnim = new FSKA(skelanim);
+                        // It matters for .seanim and .smd export what skeleton is used for the animation.
+                        // We pass the skeleton included with the .bfres file here, so later code can
+                        // use it as a backup in case no matching skeleton was found in the viewport.
+                        STSkeleton backupSkeleton = null;
+                        if (bfres.BFRESRender.models.Count > 0)
+                            backupSkeleton = bfres.BFRESRender.models[0].Skeleton;
+                        try
+                        {
+                            exportableAnim.Export($"{path}/{name}.{extension}", backupSkeleton);
+                        }
+                        catch (Exception ex)
+                        {
+                            failedExports.Add($"\n{Path.GetFileName(bfres.FilePath)} -> {ex.Message}");
+                        }
                     }
+                }
+                else
+                {
+                    foreach (var elem in bfres.resFile.SkeletalAnims)
+                    {
+                        string name = elem.Name;
+                        FSKA exportableAnim = new FSKA(elem);
+                        // It matters for .seanim and .smd export what skeleton is used for the animation.
+                        // We pass the skeleton included with the .bfres file here, so later code can
+                        // use it as a backup in case no matching skeleton was found in the viewport.
+                        STSkeleton backupSkeleton = null;
+                        if (bfres.BFRESRender.models.Count > 0)
+                            backupSkeleton = bfres.BFRESRender.models[0].Skeleton;
+                        try
+                        {
+                            exportableAnim.Export($"{path}/{name}.{extension}", backupSkeleton);
+                        }
+                        catch (Exception ex)
+                        {
+                            failedExports.Add($"\n{Path.GetFileName(bfres.FilePath)} -> {ex.Message}");
+                        }
+                    }
+
                 }
             }
             else if (fileFormat is IExportableModelContainer && exportMode == ExportMode.Models)
