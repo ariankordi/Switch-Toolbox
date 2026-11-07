@@ -206,6 +206,8 @@ namespace Bfres.Structs
                     {
                         if (SkeletonU != null)
                         {
+                            throw new NotImplementedException("ResU.Skeleton.Import needs to be implemented in BfresLibrary: https://github.com/KillzXGaming/LegacySwitchLibraries/blob/cb2a85cb994aa982f266415aa182a257dc814a11/Syroot.NintenTools.Bfres/Model/Skeleton/Skeleton.cs#L55");
+                            /*
                             ResU.Skeleton SkeltonTemp = new ResU.Skeleton();
                             SkeltonTemp.Import(ofd.FileName, GetResFileU());
                           
@@ -216,6 +218,7 @@ namespace Bfres.Structs
                             }
 
                             BfresWiiU.ReadSkeleton(this, SkeletonU, fskl);
+                            */
                         }
                         else
                         {
@@ -369,6 +372,7 @@ namespace Bfres.Structs
                     //This will just fix swapping the same bonesets with slightly adjusted indices
                     if (SkeletonU != null)
                     {
+                        /*
                         var indices = this.SkeletonU.MatrixToBoneList;
 
                         SkeletonU = new ResU.Skeleton();
@@ -378,6 +382,8 @@ namespace Bfres.Structs
                         Nodes.Clear();
                         fskl.bones.Clear();
                         BfresWiiU.ReadSkeleton(this, SkeletonU, fskl);
+                        */
+                        throw new NotImplementedException("ResU.Skeleton.Import needs to be implemented in BfresLibrary: https://github.com/KillzXGaming/LegacySwitchLibraries/blob/cb2a85cb994aa982f266415aa182a257dc814a11/Syroot.NintenTools.Bfres/Model/Skeleton/Skeleton.cs#L55");
                     }
                     else
                     {
@@ -517,7 +523,9 @@ namespace Bfres.Structs
             public override void Export(string FileName)
             {
                 if (SkeletonU != null)
+                /*
                     SkeletonU.Export(FileName, ((FMDL)Parent).GetResFileU());
+                    */ throw new NotImplementedException("ResU.Skeleton.Export needs to be implemented in BfresLibrary: https://github.com/KillzXGaming/LegacySwitchLibraries/blob/cb2a85cb994aa982f266415aa182a257dc814a11/Syroot.NintenTools.Bfres/Model/Skeleton/Skeleton.cs#L80");
                 else
                     Skeleton.Export(FileName, ((FMDL)Parent).GetResFile());
             }

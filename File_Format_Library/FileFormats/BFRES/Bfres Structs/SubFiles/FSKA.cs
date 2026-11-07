@@ -123,12 +123,15 @@ namespace Bfres.Structs
             }
             else
             {
+                /*
                 SkeletalAnimU.Copy(target.SkeletalAnimU, new ResU.SkeletalAnim.CopyFilter()
                 {
                     CopyBoneAnims = copyBoneAnims,
                     CopySettings = copySettings,
                     CopyUserData = copyUserData,
                 });
+                */
+                throw new NotImplementedException("SkeletalAnimU.Copy needs to be implemented in BfresLibrary: https://github.com/KillzXGaming/LegacySwitchLibraries/blob/cb2a85cb994aa982f266415aa182a257dc814a11/Syroot.NintenTools.Bfres/SkeletalAnim/SkeletalAnim.cs#L245");
             }
 
             OpenAnimationData();
